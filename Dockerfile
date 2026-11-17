@@ -3,12 +3,12 @@ ARG PRUSA_TAG=main
 RUN apk add --no-cache git nodejs npm pnpm make bash
 RUN git clone --depth 1 --branch "${PRUSA_TAG}" https://github.com/prusa3d/prusa-connect.git /src
 WORKDIR /src
-RUN if [ -f pnpm-workspace.yaml ]; then \
-      pnpm install && pnpm -r --filter "./packages/*" run build && pnpm --filter "./frontend" run build; \
-    elif [ -f frontend/package.json ]; then \
-      for pkg in packages/*; do [ -f "$pkg/package.json" ] && (cd "$pkg" && pnpm install && pnpm run build); done && \
-      cd frontend && pnpm install && pnpm run build; \
-    fi
+RUN for pkg in packages/* packages/*/*; do \
+      if [ -f "$pkg/package.json" ]; then \
+        (cd "$pkg" && pnpm install && pnpm run --if-present build); \
+      fi; \
+    done && \
+    cd frontend && pnpm install && pnpm run build
 RUN CGO_ENABLED=0 go build -o /prusa_connect ./cmd/prusa_connect
 
 FROM alpine:latest
