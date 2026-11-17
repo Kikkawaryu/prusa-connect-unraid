@@ -7,7 +7,7 @@
   <MyIP/>
   <Shell>sh</Shell>
   <Privileged>false</Privileged>
-  <Support>&lt;YOUR_FORUM_SUPPORT_URL&gt;</Support>
+  <Support>&lt;https://forums.unraid.net/topic/201328-support-prusa-connect-local-self-hosted/&gt;</Support>
   <Project>https://github.com/prusa3d/prusa-connect</Project>
   <Overview>Self-hosted local Prusa Connect server for managing Prusa 3D printers on your LAN without relying on Prusa's cloud.&#xD;
 &#xD;
@@ -17,7 +17,7 @@ Notes:&#xD;
   <Category>Tools: Productivity:</Category>
   <WebUI>http://[IP]:[PORT:8080]</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/Kikkawaryu/prusa-connect-unraid/main/prusa-connect.xml</TemplateURL>
-  <Icon>https://raw.githubusercontent.com/prusa3d/prusa-connect/main/frontend/public/icons/icon.svg</Icon>
+  <Icon>https://raw.githubusercontent.com/Kikkawaryu/prusa-connect-unraid/main/PrusaConnect.png</Icon>
   <ExtraParams/>
   <PostArgs/>
   <CPUset/>
