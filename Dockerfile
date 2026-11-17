@@ -9,12 +9,18 @@ RUN for pkg in packages/* packages/*/*; do \
       fi; \
     done && \
     cd frontend && pnpm install && pnpm run build
-RUN CGO_ENABLED=0 go build -o /prusa_connect ./cmd/prusa_connect
+RUN MAIN_PKG=$(dirname $(find ./cmd -name "main.go" | head -n 1)) && \
+    echo "Building Go package from: ${MAIN_PKG:-.}" && \
+    CGO_ENABLED=0 go build -o /prusa_connect "${MAIN_PKG:-.}" && \
+    mkdir -p /out && \
+    if [ -f config/config.yaml ]; then cp config/config.yaml /out/default-config.yaml; \
+    else find . -name "config.yaml" -exec cp {} /out/default-config.yaml \; -quit; fi && \
+    touch /out/default-config.yaml
 
 FROM alpine:latest
 RUN apk add --no-cache ca-certificates tzdata util-linux
 COPY --from=builder /prusa_connect /prusa_connect
-COPY --from=builder /src/config/config.yaml /opt/default-config.yaml
+COPY --from=builder /out/default-config.yaml /opt/default-config.yaml
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 EXPOSE 8080
