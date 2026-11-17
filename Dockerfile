@@ -1,10 +1,9 @@
 FROM golang:1.26-alpine AS builder
 ARG PRUSA_TAG=main
-RUN apk add --no-cache git nodejs npm make
-RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN apk add --no-cache git nodejs npm pnpm make
 RUN git clone --depth 1 --branch "${PRUSA_TAG}" https://github.com/prusa3d/prusa-connect.git /src
 WORKDIR /src
-RUN if [ -f frontend/package.json ]; then cd frontend && pnpm install --frozen-lockfile || pnpm install && pnpm run build; fi
+RUN if [ -f frontend/package.json ]; then cd frontend && pnpm install && pnpm run build; fi
 RUN CGO_ENABLED=0 go build -o /prusa_connect ./cmd/prusa_connect
 
 FROM alpine:latest
