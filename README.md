@@ -12,7 +12,7 @@ Everything runs locally on your own network with no cloud connection required. I
 - **Docker Image:** `ghcr.io/kikkawaryu/prusa-connect:latest`
 - **Template Repository:** https://github.com/Kikkawaryu/prusa-connect-unraid
 - **Upstream Project:** https://github.com/prusa3d/prusa-connect
-- **Unraid Support Thread:** https://forums.unraid.net/ (replace with your direct thread link if desired)
+- **Unraid Support Thread:** https://forums.unraid.net/topic/201328-support-prusa-connect-local-self-hosted/
 
 ## Installation on Unraid
 1. Open the **Apps** tab in Unraid and search for **prusa-connect**.
