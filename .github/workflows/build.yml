@@ -86,7 +86,7 @@ jobs:
           file: docker/server/Dockerfile
           push: true
           tags: |
-            ghcr.io/${{ github.repository }}:latest
-            ghcr.io/${{ github.repository }}:${{ steps.release.outputs.tag }}
+            ghcr.io/kikkawaryu/prusa-connect:latest
+            ghcr.io/kikkawaryu/prusa-connect:${{ steps.release.outputs.tag }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
