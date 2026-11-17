@@ -19,8 +19,8 @@ RUN MAIN_PKG=$(dirname $(find ./cmd -name "main.go" | head -n 1)) && \
 
 FROM alpine:latest
 RUN apk add --no-cache ca-certificates tzdata util-linux && \
-    addgroup -g 10001 -S prusa && \
-    adduser -u 10001 -S -G prusa -H -s /sbin/nologin prusa
+    echo "prusa:x:10001:" >> /etc/group && \
+    echo "prusa:x:10001:10001:prusa:/nonexistent:/sbin/nologin" >> /etc/passwd
 COPY --from=builder /prusa_connect /prusa_connect
 COPY --from=builder /out/default-config.yaml /opt/default-config.yaml
 COPY entrypoint.sh /entrypoint.sh
