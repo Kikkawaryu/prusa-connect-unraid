@@ -13,7 +13,6 @@
 &#xD;
 Notes:&#xD;
 - Default WebUI &amp; Printer API port is 8080. If port 8080 is already in use on your Unraid server (e.g., qBittorrent/SABnzbd), change the Host Port in the template to an open port like 8085.&#xD;
-- Permissions: This container runs as UID/GID 10001:10001. If it fails to start with a permission error on first run, open the Unraid terminal and run: chown -R 10001:10001 /mnt/user/appdata/prusa-connect&#xD;
 - First-Time Setup Code: On initial startup, the server generates a one-time setup code to claim admin ownership. Open the container logs after starting and look for "setup_code=XXXX-XXXX-XXXX".</Overview>
   <Category>Tools: Productivity:</Category>
   <WebUI>http://[IP]:[PORT:8080]</WebUI>
@@ -27,7 +26,7 @@ Notes:&#xD;
   <DonateLink/>
   <Requires/>
   <Config Name="WebUI &amp; Printer API Port" Target="8080" Default="8080" Mode="tcp" Description="Default port is 8080. Change the Host Port if 8080 is already in use on your Unraid server." Type="Port" Display="always" Required="true" Mask="false">8080</Config>
-  <Config Name="Config Overlay (config.d)" Target="/config/config.d" Default="/mnt/user/appdata/prusa-connect/config.d" Mode="rw" Description="Machine-owned resource overlay and authorization database." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/prusa-connect/config.d</Config>
+  <Config Name="Config Directory" Target="/config" Default="/mnt/user/appdata/prusa-connect/config" Mode="rw" Description="Configuration file (config.yaml) and machine-owned overlay (config.d)." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/prusa-connect/config</Config>
   <Config Name="Data Directory" Target="/data" Default="/mnt/user/appdata/prusa-connect/data" Mode="rw" Description="Persistent runtime data." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/prusa-connect/data</Config>
   <Config Name="Files Directory" Target="/files" Default="/mnt/user/appdata/prusa-connect/files" Mode="rw" Description="Uploaded print files and G-code." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/prusa-connect/files</Config>
   <Config Name="Storage Directory" Target="/storage" Default="/mnt/user/appdata/prusa-connect/storage" Mode="rw" Description="Local object storage." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/prusa-connect/storage</Config>
