@@ -100,3 +100,18 @@ jobs:
         if: steps.check.outputs.skip != 'true'
         run: |
           TAG="${{ steps.release.outputs.tag }}"
+
+          - name: Build and push Unraid wrapper image
+        if: steps.check.outputs.skip != 'true'
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: Dockerfile
+          push: true
+          build-contexts: |
+            prusa-base=docker-image://localhost:5000/prusa-base:latest
+          tags: |
+            ghcr.io/kikkawaryu/prusa-connect:latest
+            ghcr.io/kikkawaryu/prusa-connect:${{ steps.release.outputs.tag }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
