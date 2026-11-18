@@ -96,12 +96,12 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-     - name: Download default config.yaml
-       if: steps.check.outputs.skip != 'true'
-       run: |
-        TAG="${{ steps.release.outputs.tag }}"
-        if ! curl -fsSL "https://github.com/prusa3d/prusa-connect/releases/download/${TAG}/config.yaml" -o default-config.yaml; then
-        curl -fsSL "https://github.com/prusa3d/prusa-connect/releases/latest/download/config.yaml" -o default-config.yaml
+      - name: Download default config.yaml
+        if: steps.check.outputs.skip != 'true'
+        run: |
+          TAG="${{ steps.release.outputs.tag }}"
+          if ! curl -fsSL "https://github.com/prusa3d/prusa-connect/releases/download/${TAG}/config.yaml" -o default-config.yaml; then
+            curl -fsSL "https://github.com/prusa3d/prusa-connect/releases/latest/download/config.yaml" -o default-config.yaml
           fi
 
       - name: Build and push Unraid wrapper image
