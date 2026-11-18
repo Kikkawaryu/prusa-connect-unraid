@@ -44,7 +44,7 @@ Everything runs locally on your own network with no cloud connection required. I
 | **Storage** | `/mnt/user/appdata/prusa-connect/storage` | `/storage` | Persistent storage assets |
 
 ## Permissions & Configuration Notes
-- The container automatically initializes `/config/config.yaml` on first boot if it does not already exist and runs the service under UID/GID `10001:10001`.
+- On first boot, the container automatically creates a default `/config/config.yaml` (if one does not already exist) and sets ownership to Unraid's default UID/GID `99:100` (`nobody:users`). Existing edits to `config.yaml` are never overwritten.
 - Ensure your appdata volume mappings are set to **Read/Write** so the entrypoint script can initialize directories and permissions cleanly.
 
 ## Automated Builds
