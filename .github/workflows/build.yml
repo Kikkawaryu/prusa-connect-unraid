@@ -100,4 +100,6 @@ jobs:
         if: steps.check.outputs.skip != 'true'
         run: |
           TAG="${{ steps.release.outputs.tag }}"
-          curl -fsSL "
+          if ! curl -fsSL "https://github.com/prusa3d/prusa-connect/releases/download/${TAG}/config.yaml" -o default-config.yaml; then
+            curl -fsSL "https://github.com/prusa3d/prusa-connect/releases/latest/download/config.yaml" -o default-config.yaml
+          fi
