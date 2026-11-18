@@ -12,4 +12,7 @@ fi
 
 chown -R "${PUID}:${PGID}" /config /data /files /storage
 
+rm -f /tmp/.X99-lock
+Xvfb :99 -screen 0 1024x768x24 -ac >/dev/null 2>&1 &
+
 exec gosu "${PUID}:${PGID}" "$@"
